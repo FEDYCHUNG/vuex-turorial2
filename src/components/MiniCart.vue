@@ -4,18 +4,19 @@
     style="min-width:320px; right:0; left:auto;"
     aria-labelledby="triggerId"
   >
-    <div>
+    <div v-for="item in cart" :key="item.product.id">
       <div class="px-2 d-flex justify-content-between">
         <div>
-          <strong>Product Title</strong>
-          <br />1 x $23
+          <strong>{{ item.product.title }}</strong>
+          <br />{{ item.quantity }} x $ {{ item.product.price }}
         </div>
         <div>
           <a href="#" class="badge badge-secondary">remove</a>
         </div>
       </div>
+      <hr />
     </div>
-    <hr />
+
     <div class="d-flex justify-content-between">
       <span>Total: $23</span>
       <a href="#">Clear Cart</a>
@@ -24,5 +25,11 @@
 </template>
 
 <script>
-export default {};
+export default {
+  computed: {
+    cart() {
+      return this.$store.state.cart;
+    },
+  },
+};
 </script>
