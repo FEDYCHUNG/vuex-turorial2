@@ -26,4 +26,18 @@ export const addProductToCart = ({
         product,
         quantity
     })
+
+    axios.post('http://localhost:8000/api/cart', {
+        product_id: product.id,
+        quantity
+    });
+};
+
+// getCartItems
+export const getCartItems = ({
+    commit
+}) => {
+    axios.get("http://localhost:8000/api/cart").then((response) => {
+        commit("SET_CART", response.data);
+    });
 };

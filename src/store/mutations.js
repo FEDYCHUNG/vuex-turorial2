@@ -24,3 +24,7 @@ export const ADD_TO_CART = (state, {
         quantity,
     });
 }
+
+export const SET_CART = (state, cartItems) => {
+    state.cart = cartItems;
+}
