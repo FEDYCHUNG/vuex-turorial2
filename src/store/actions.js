@@ -33,7 +33,6 @@ export const addProductToCart = ({
     });
 };
 
-// getCartItems
 export const getCartItems = ({
     commit
 }) => {
@@ -41,3 +40,19 @@ export const getCartItems = ({
         commit("SET_CART", response.data);
     });
 };
+
+export const removeProductFromCart = ({
+    commit
+}, product) => {
+    commit("REMOVE_PRODUCT_FROM_CART", product);
+
+    axios.delete(`http://localhost:8000/api/cart/${product.id}`);
+}
+
+export const clearCartItems = ({
+    commit
+}) => {
+    commit("CLEAR_CART_ITEMS");
+
+    axios.delete("http://localhost:8000/api/cart");
+}
