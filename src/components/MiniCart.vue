@@ -30,7 +30,7 @@
 </template>
 
 <script>
-import { mapState, mapGetters } from "vuex";
+import { mapState, mapGetters, mapActions } from "vuex";
 
 export default {
   computed: {
@@ -41,12 +41,11 @@ export default {
     this.$store.dispatch("getCartItems");
   },
   methods: {
-    removeProductFromCart(product) {
-      this.$store.dispatch("removeProductFromCart", product);
-    },
-    clearCartItems() {
-      this.$store.dispatch("clearCartItems");
-    },
+    ...mapActions(
+      ["removeProductFromCart"],
+      ["clearCartItems"],
+      ["getCartItems"]
+    ),
   },
 };
 </script>
