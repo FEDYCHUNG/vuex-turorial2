@@ -30,14 +30,12 @@
 </template>
 
 <script>
+import { mapState, mapGetters } from "vuex";
+
 export default {
   computed: {
-    cart() {
-      return this.$store.state.cart;
-    },
-    cartTotalPrice() {
-      return this.$store.getters.cartTotalPrice;
-    },
+    ...mapState(["cart"]),
+    ...mapGetters(["cartTotalPrice"]),
   },
   mounted() {
     this.$store.dispatch("getCartItems");
