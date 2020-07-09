@@ -1,5 +1,3 @@
-export default {
-    products: [],
-    product: null,
-    cart: [],
+export default{
+    
 }

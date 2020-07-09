@@ -17,7 +17,9 @@ export default {
     ProductCard,
   },
   computed: {
-    ...mapState(['products']),
+    ...mapState({
+      products: state => state.product.products,
+    }),
   },
   mounted() {
     this.getProducts();
