@@ -29,6 +29,13 @@ export default {
   props: ["product"],
   methods: {
     ...mapActions(["addProductToCart"]),
+
+    addToCart(){
+      this.addProductToCart({
+        product: this.product,
+        quantity: 1,
+      });
+    },
   },
 };
 </script>
