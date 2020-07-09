@@ -16,23 +16,25 @@
 </template>
 
 <script>
+import {mapState, mapActions} from 'vuex';
+
 export default {
   props: ["id"],
   computed: {
-    product() {
-      return this.$store.state.product;
-    },
+    ...mapState(["product"]),
   },
   methods: {
-    addToCart() {
-      this.$store.dispatch("addProductToCart", {
+    ...mapActions(["addProductToCart","getProduct"]),
+
+    addToCart(){
+      this.addProductToCart({
         product: this.product,
         quantity: 1,
       });
-    },
+    }
   },
   mounted() {
-    this.$store.dispatch("getProduct", this.id);
+    this.getProduct(this.id);
   },
 };
 </script>
