@@ -20,9 +20,7 @@
               data-toggle="dropdown"
               aria-haspopup="true"
               aria-expanded="false"
-            >
-              {{ cartItemCount }} Cart
-            </button>
+            >{{ cartItemCount }} Cart</button>
             <div @click="$event.stopPropagation()">
               <MiniCart />
             </div>
@@ -39,10 +37,10 @@ import MiniCart from "./MiniCart";
 
 export default {
   components: {
-    MiniCart,
+    MiniCart
   },
   computed: {
-    ...mapGetters(["cartItemCount"]),
-  },
+    ...mapGetters("cart", ["cartItemCount"])
+  }
 };
 </script>

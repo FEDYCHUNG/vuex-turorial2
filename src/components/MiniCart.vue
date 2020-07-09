@@ -8,15 +8,15 @@
       <div class="px-2 d-flex justify-content-between">
         <div>
           <strong>{{ item.product.title }}</strong>
-          <br />{{ item.quantity }} x $ {{ item.product.price }}
+          <br />
+          {{ item.quantity }} x $ {{ item.product.price }}
         </div>
         <div>
           <a
             href="#"
             class="badge badge-secondary"
             @click.prevent="removeProductFromCart(item.product)"
-            >remove</a
-          >
+          >remove</a>
         </div>
       </div>
       <hr />
@@ -35,18 +35,26 @@ import { mapState, mapGetters, mapActions } from "vuex";
 export default {
   computed: {
     ...mapState({
-      cart: state => state.cart.cart,
+      cart: state => state.cart.cart
     }),
-    ...mapGetters(["cartTotalPrice"]),
+
+    ...mapGetters("cart", ["cartTotalPrice"])
+
+    // or
+    // ...mapGetters({
+    //   cartTotalPrice: "cart/cartTotalPrice",
+    // }),
   },
   mounted() {
     this.getCartItems();
     // this.$store.dispatch("getCartItems");
   },
   methods: {
-    ...mapActions(
-      ["removeProductFromCart","clearCartItems","getCartItems"],
-    ),
-  },
+    ...mapActions("cart", [
+      "removeProductFromCart",
+      "clearCartItems",
+      "getCartItems"
+    ])
+  }
 };
 </script>

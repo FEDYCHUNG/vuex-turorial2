@@ -1,31 +1,27 @@
 <template>
   <div class="d-flex align-item-strecth flex-wrap">
-    <ProductCard
-      v-for="product in products"
-      :key="product.id"
-      :product="product"
-    />
+    <ProductCard v-for="product in products" :key="product.id" :product="product" />
   </div>
 </template>
 
 <script>
-import {mapState, mapActions} from 'vuex';
+import { mapState, mapActions } from "vuex";
 import ProductCard from "./ProductCard";
 
 export default {
   components: {
-    ProductCard,
+    ProductCard
   },
   computed: {
     ...mapState({
-      products: state => state.product.products,
-    }),
+      products: state => state.product.products
+    })
   },
   mounted() {
     this.getProducts();
   },
-  methods:{
-    ...mapActions(["getProducts"]),
+  methods: {
+    ...mapActions("product", ["getProducts"])
   }
 };
 </script>
