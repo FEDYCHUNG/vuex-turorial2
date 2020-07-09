@@ -8,38 +8,39 @@
       <h3>$ {{ product.price }}</h3>
       <input type="number" class="text-center col-1 mr-2 p-1" v-model.number="quantity" />
       <button class="btn btn-primary" @click="addToCart()">Add to Cart</button>
-      <p class="mt-4">
-        {{ product.description }}
-      </p>
+      <p class="mt-4">{{ product.description }}</p>
     </div>
   </div>
 </template>
 
 <script>
-import {mapState, mapActions} from 'vuex';
+import { mapState, mapActions } from "vuex";
 
 export default {
   props: ["id"],
-  data(){
+  data() {
     return {
       quantity: 1
-    }
+    };
   },
   computed: {
-    ...mapState(["product"]),
+    ...mapState({
+      product: state => state.product.product
+    })
   },
   methods: {
-    ...mapActions(["addProductToCart","getProduct"]),
+    ...mapActions("product", ["getProduct"]),
+    ...mapActions("cart", ["addProductToCart"]),
 
-    addToCart(){
+    addToCart() {
       this.addProductToCart({
         product: this.product,
-        quantity: this.quantity,
+        quantity: this.quantity
       });
     }
   },
   mounted() {
     this.getProduct(this.id);
-  },
+  }
 };
 </script>
