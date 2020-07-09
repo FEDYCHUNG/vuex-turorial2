@@ -38,13 +38,14 @@ export default {
     ...mapGetters(["cartTotalPrice"]),
   },
   mounted() {
+    // this.getCartItems();
     this.$store.dispatch("getCartItems");
   },
   methods: {
     ...mapActions(
       ["removeProductFromCart"],
       ["clearCartItems"],
-      ["getCartItems"]
+      ["getCartItems"],
     ),
   },
 };

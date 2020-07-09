@@ -9,6 +9,7 @@
 </template>
 
 <script>
+import {mapState, mapActions} from 'vuex';
 import ProductCard from "./ProductCard";
 
 export default {
@@ -16,12 +17,13 @@ export default {
     ProductCard,
   },
   computed: {
-    products() {
-      return this.$store.state.products;
-    },
+    ...mapState(['products']),
   },
   mounted() {
-    this.$store.dispatch("getProducts");
+    this.getProducts();
   },
+  methods:{
+    ...mapActions(["getProducts"]),
+  }
 };
 </script>
