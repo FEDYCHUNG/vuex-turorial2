@@ -1,9 +1,10 @@
-import axios from "axios";
+import product from '../api/product';
+import cart from '../api/cart';
 
 export const getProducts = ({
     commit
 }) => {
-    axios.get("http://localhost:8000/api/products").then((response) => {
+    product.all().then((response) => {
         commit("SET_PRODUCTS", response.data);
     });
 };
@@ -11,7 +12,7 @@ export const getProducts = ({
 export const getProduct = ({
     commit
 }, productId) => {
-    axios.get(`http://localhost:8000/api/products/${productId}`).then((response) => {
+    product.show(productId).then((response) => {
         commit("SET_PRODUCT", response.data);
     });
 };
@@ -26,8 +27,7 @@ export const addProductToCart = ({
         product,
         quantity
     })
-
-    axios.post('http://localhost:8000/api/cart', {
+    cart.post({
         product_id: product.id,
         quantity
     });
@@ -36,7 +36,7 @@ export const addProductToCart = ({
 export const getCartItems = ({
     commit
 }) => {
-    axios.get("http://localhost:8000/api/cart").then((response) => {
+    cart.all().then((response) => {
         commit("SET_CART", response.data);
     });
 };
@@ -45,14 +45,12 @@ export const removeProductFromCart = ({
     commit
 }, product) => {
     commit("REMOVE_PRODUCT_FROM_CART", product);
-
-    axios.delete(`http://localhost:8000/api/cart/${product.id}`);
+    cart.delete(product.id);
 }
 
 export const clearCartItems = ({
     commit
 }) => {
     commit("CLEAR_CART_ITEMS");
-
-    axios.delete("http://localhost:8000/api/cart");
+    cart.deleteAll();
 }
