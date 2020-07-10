@@ -1,8 +1,8 @@
-
 import cart from '../../../api/cart';
 
 export const addProductToCart = ({
-    commit
+    commit,
+    dispatch
 }, {
     product,
     quantity
@@ -10,7 +10,15 @@ export const addProductToCart = ({
     commit('ADD_TO_CART', {
         product,
         quantity
-    })
+    });
+
+    dispatch("addNotification", {
+        type: 'success',
+        message: 'Product added to cart.'
+    }, {
+        root: true
+    });
+
     cart.post({
         product_id: product.id,
         quantity
