@@ -34,15 +34,33 @@ export const getCartItems = ({
 };
 
 export const removeProductFromCart = ({
-    commit
+    commit,
+    dispatch
 }, product) => {
     commit("REMOVE_PRODUCT_FROM_CART", product);
+
+    dispatch("addNotification", {
+        type: 'success',
+        message: 'Product remove from cart.'
+    }, {
+        root: true
+    });
+
     cart.delete(product.id);
 }
 
 export const clearCartItems = ({
-    commit
+    commit,
+    dispatch
 }) => {
     commit("CLEAR_CART_ITEMS");
+
+    dispatch("addNotification", {
+        type: 'success',
+        message: 'Product remove from cart.'
+    }, {
+        root: true
+    });
+
     cart.deleteAll();
 }
